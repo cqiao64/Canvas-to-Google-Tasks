@@ -49,3 +49,10 @@ Before running the script, you need to setup Google Tasks API in your project:
 
 This script uses OAuth 2.0 to authorize the application to access Google Tasks API. The first time you run the script, it will open a new window prompting you to authorize access. Upon successful authorization, the script will store your access token in a file named 'token.pickle', so that you don't need to re-authorize every time you run the script.
 
+# Canvas Event to Text File
+
+As an alternative to importing assignments into Google Tasks, the main_no_api.py can parse the assignments into a simple text file. This might be useful if you prefer to manage your tasks manually or with a different tool.
+
+Just like the Google Tasks version, this script will ask you for the .ics file URL, start date, whether to include Zoom events, and whether to sort tasks by class code or chronologically. The parsed assignments will be saved in a file named 'assignments.txt' in the same directory.
+
+
