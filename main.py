@@ -24,7 +24,12 @@ def parse_ics(file_url, start_date_str, include_zoom, sort_chronologically):
         return
 
     cal = Calendar.from_ical(response.text)
-    start_date = datetime.strptime(start_date_str, "%m/%d/%Y").date() if start_date_str else None
+    try:
+        start_date = datetime.strptime(start_date_str, "%m/%d/%Y").date() if start_date_str else None
+    except ValueError as err:
+        print(f"Invalid date format: {err}")
+        return
+
     assignments = []
 
     for component in cal.walk():
@@ -32,7 +37,12 @@ def parse_ics(file_url, start_date_str, include_zoom, sort_chronologically):
             description = component.get('description')
             summary = component.get('summary')
 
-            match = re.search(r'\b[A-Za-z]{3}\d{4}\b', summary)
+            try:
+                match = re.search(r'\b[A-Za-z]{3}\d{4}\b', summary)
+            except re.error as err:
+                print(f"Invalid regular expression: {err}")
+                return
+
             class_code = match.group(0) if match else None
             start = component.get('dtstart').dt
             
@@ -60,19 +70,33 @@ def parse_ics(file_url, start_date_str, include_zoom, sort_chronologically):
 
 def connect_to_tasks_api():
     creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
+    try:
+        if os.path.exists('token.pickle'):
+            with open('token.pickle', 'rb') as token:
+                creds = pickle.load(token)
+    except IOError as err:
+        print(f"Error reading token.pickle: {err}")
+        return
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
-        with open('token.pickle', 'wb') as token:
-                        pickle.dump(creds, token)
+        try:
+            with open('token.pickle', 'wb') as token:
+                pickle.dump(creds, token)
+        except IOError as err:
+            print(f"Error writing to token.pickle: {err}")
+            return
 
-    service = build('tasks', 'v1', credentials=creds)
+    try:
+        service = build('tasks', 'v1', credentials=creds)
+    except Exception as err:
+        print(f"Error connecting to Tasks API: {err}")
+        return
+
     return service
 
 def create_task(service, task_title, due_date):
