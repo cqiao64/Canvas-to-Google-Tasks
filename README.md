@@ -26,7 +26,9 @@ pip install requests icalendar google-auth google-auth-httplib2 google-auth-oaut
 
 You can run the script in the command line by executing:
 
+```shell
 python main.py
+```
 
 When running the script, it will prompt you to enter the following:
 
