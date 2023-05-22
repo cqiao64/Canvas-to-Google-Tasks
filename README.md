@@ -18,7 +18,9 @@ This script requires the following Python packages:
 
 You can install these using pip:
 
+```shell
 pip install requests icalendar google-auth google-auth-httplib2 google-auth-oauthlib google-api-python-client pickle tkcalendar
+```
 
 ## Usage
 
