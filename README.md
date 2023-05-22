@@ -1,5 +1,7 @@
 # Google Tasks Canvas ICS Importer
 
+![image](https://github.com/cqiao64/Canvas-to-Google-Tasks/assets/40278799/d8171d46-7a62-4c22-ba63-31178f15298f)
+
 This Python script is designed to import assignments from Canvas (or other systems that export .ics files) into Google Tasks. This allows you to keep track of your assignments directly in Google Tasks. The script includes a graphical user interface (GUI) built with Tkinter, which provides an easy and convenient way to input information and execute the script.
 
 ## Requirements
