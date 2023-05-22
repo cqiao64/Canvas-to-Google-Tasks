@@ -1,6 +1,6 @@
 # Google Tasks Canvas ICS Importer
 
-This Python script is designed to import assignments from Canvas (or other systems that export .ics files) into Google Tasks. This allows you to keep track of your assignments directly in Google Tasks.
+This Python script is designed to import assignments from Canvas (or other systems that export .ics files) into Google Tasks. This allows you to keep track of your assignments directly in Google Tasks. The script includes a graphical user interface (GUI) built with Tkinter, which provides an easy and convenient way to input information and execute the script.
 
 ## Requirements
 
@@ -13,10 +13,12 @@ This script requires the following Python packages:
 - `google-auth-oauthlib`
 - `google-api-python-client`
 - `pickle`
+- `tkinter`
+- `tkcalendar`
 
 You can install these using pip:
 
-pip install requests icalendar google-auth google-auth-httplib2 google-auth-oauthlib google-api-python-client pickle
+`pip install requests icalendar google-auth google-auth-httplib2 google-auth-oauthlib google-api-python-client pickle tkcalendar`
 
 ## Usage
 
@@ -30,6 +32,8 @@ When running the script, it will prompt you to enter the following:
 - The start date in the format MM/DD/YYYY (tasks prior to this date will not be imported).
 - Whether or not to include Zoom events.
 - Whether or not to sort tasks chronologically.
+
+Click the "Execute" button to start the process. The script will parse the .ics file, create tasks in Google Tasks for each event, and sort them as specified. If you want to clear all tasks, you can use the "Clear all tasks" button.
 
 ## Google API Configuration
 
